@@ -10,10 +10,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:views roles')->only('index');
-        $this->middleware('permission:creates roles')->only('create');
-        $this->middleware('permission:edits roles')->only('edit');
-        $this->middleware('permission:deletes roles')->only('destroy');
+        
     }
     public function index(){
         $role = Role::withCount('permissions', 'users')->paginate(10);

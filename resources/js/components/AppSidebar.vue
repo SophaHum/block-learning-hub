@@ -5,7 +5,8 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Rss  } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Rss } from 'lucide-vue-next';
+import { User, ShieldCheck, ShieldX } from 'lucide-vue-next';
 
 import AppLogo from './AppLogo.vue';
 
@@ -16,10 +17,25 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Posts',
+        title: 'Blog',
         href: '/blog',
         icon: Rss,
-    }
+    },
+    {
+        title: 'Permissions',
+        href: '/permissions',
+        icon: ShieldX,
+    },
+    {
+        title: 'Roles',
+        href: '/roles',
+        icon: ShieldCheck,
+    },
+    {
+        title: 'Users',
+        href: '/users',
+        icon: User,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
@@ -55,7 +71,7 @@ const footerNavItems: NavItem[] = [
         </SidebarContent>
 
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
+            <!-- <NavFooter :items="footerNavItems" /> -->
             <NavUser />
         </SidebarFooter>
     </Sidebar>

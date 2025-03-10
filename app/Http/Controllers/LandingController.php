@@ -7,15 +7,13 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use App\Models\Post;
 
 
 class LandingController extends Controller
 {
     public function __construct(){
-        $this->middleware('permission:views landings')->only('index');
-        $this->middleware('permission:creates landings')->only('create');
-        $this->middleware('permission:edits landings')->only('edit');
-        $this->middleware('permission:deletes landings')->only('destroy');
+       
     }
 
     public function index()

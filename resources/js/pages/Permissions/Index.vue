@@ -6,8 +6,8 @@ import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Roles',
-        href: '/roles',
+        title: 'Permissions',
+        href: '/permissions',
     },
 ];
 
@@ -17,7 +17,7 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Roles" />
+    <Head title="Permissions" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
