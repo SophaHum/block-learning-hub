@@ -54,7 +54,7 @@
         <div class="container">
           <div class="text-center space-y-4">
             <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">
-              Learn. Build. By .Sopha.
+              Learn. Build. Master.
             </h1>
             <p class="mx-auto max-w-[700px] text-lg text-muted-foreground">
               Explore the latest in programming, framework updates, and networking tutorials.
@@ -151,8 +151,8 @@ const breadcrumbItems = ref([
 const isMobileMenuOpen = ref(false)
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .container {
   @apply max-w-7xl mx-auto px-4;
 }
-</style>
+</style> -->

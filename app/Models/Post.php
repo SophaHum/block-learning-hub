@@ -18,6 +18,16 @@ class Post extends Model
         'published_at',
     ];
 
+    protected $casts = [
+        'is_published' => 'boolean',
+        'published_at' => 'datetime',
+        'category_id' => 'integer',
+        'user_id' => 'integer',
+    ];
+
+    // Make sure all attributes are properly accessible
+    protected $guarded = [];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

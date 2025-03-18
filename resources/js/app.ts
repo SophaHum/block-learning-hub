@@ -6,6 +6,8 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { initializeTheme } from './composables/useAppearance';
+import PrimeVue from 'primevue/config';
+import Editor from 'primevue/editor';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -29,6 +31,8 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(PrimeVue)
+            .component('Editor', Editor)
             .mount(el);
     },
     progress: {

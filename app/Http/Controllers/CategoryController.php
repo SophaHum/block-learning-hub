@@ -12,14 +12,15 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        
     }
+
     public function index()
     {
         $categories = Category::withCount('posts')
-        ->orderBy('id', 'desc')
-        ->paginate(10);
-        return Inertia::render('Categories/Index',[
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Categories/Index', [
             'categories' => $categories,
             'can' => [
                 'create_categories' => Auth::user()->can('create categories'),
@@ -31,7 +32,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return Inertia::render('Categories/Create',[
+        return Inertia::render('Categories/Create', [
             'can' => [
                 'create_categories' => Auth::user()->can('create categories'),
             ]
@@ -42,11 +43,10 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'description' => 'required|string',
-            'color' => 'required|string|max:6',
+            'description' => 'nullable|string',
         ]);
 
+        // Generate slug from the name
         $validated['slug'] = Str::slug($validated['name']);
 
         Category::create($validated);
@@ -69,7 +69,7 @@ class CategoryController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(10);
 
-        return Inertia::render('Categories/Show',[
+        return Inertia::render('Categories/Show', [
             'category' => $category,
             'posts' => $posts,
             'can' => [
@@ -78,9 +78,10 @@ class CategoryController extends Controller
             ]
         ]);
     }
+
     public function edit(Category $category)
     {
-        return Inertia::render('Categories/Edit',[
+        return Inertia::render('Categories/Edit', [
             'category' => $category,
             'can' => [
                 'edit_categories' => Auth::user()->can('edit categories'),
@@ -92,11 +93,10 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'description' => 'required|string',
-            'color' => 'required|string|max:6',
+            'description' => 'nullable|string',
         ]);
 
+        // Update slug if name has changed
         $validated['slug'] = Str::slug($validated['name']);
 
         $category->update($validated);
@@ -109,5 +109,23 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::where('name', 'like', "%{$query}%")
+            ->withCount('posts')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Categories/Index', [
+            'categories' => $categories,
+            'can' => [
+                'create_categories' => Auth::user()->can('create categories'),
+                'edit_categories' => Auth::user()->can('edit categories'),
+                'delete_categories' => Auth::user()->can('delete categories'),
+            ]
+        ]);
     }
 }
